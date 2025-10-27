@@ -1,0 +1,57 @@
+Category: General Skills
+Challenge Name: Repetition
+
+🧩 Challenge Description :
+Decode the repeatedly encoded Base64 text to obtain the flag.
+
+🧠 Approach
+Here’s how I solved it step by step:
+
+1. Copied the challenge file link from the PicoCTF site.
+
+2. Created a directory for the challenge:
+mkdir repetition
+cd repetition
+
+3. Downloaded the file using wget:
+
+wget <paste-challenge-file-link-here>
+
+4. Checked files in the directory:
+
+ls
+Found a file named enc_flag.
+
+5. Viewed the contents
+
+cat enc_flag
+
+It contained long Base64-encoded text.
+
+6. Created a Python script base64decode.py using the nano editor:
+
+import base64
+
+with open('enc_flag') as file:
+    data = file.read()
+
+while 'picoCTF' not in data:
+    data = base64.b64decode(data).decode('utf8')
+
+print(data)
+
+
+7. Ran the script:
+
+python base64decode.py
+
+
+The script decoded the text multiple times until it revealed the flag 🎯
+
+picoCTF{*************}
+
+🧰 Tools Used
+Python
+Linux terminal
+Base64 library
+
