@@ -1,0 +1,58 @@
+Challenge summary
+You are given:
+-An encrypted flag file (level2.flag.txt.enc)
+-A decryption script (level2.py) which contains the decryption routine and a password check
+
+Your goal: find the password required by the script, run the script with that password, and recover the plaintext flag.
+
+What I did — step-by-step :
+1.Create a working directory and download files
+mkdir pw_crack2
+cd pw_crack2
+
+# download both files (replace <link_to_level2.py> and <link_to_flag_enc>)
+wget <link_to_level2.py>
+wget <link_to_level2.flag.txt.enc>
+
+2.Inspect the decryption script
+ls
+cat level2.py
+
+3.Inside level2.py you will find a helper function and a password check. The important parts:
+def str_xor(secret, key):
+    # extend key to secret length
+    new_key = key
+    i = 0
+    while len(new_key) < len(secret):
+        new_key = new_key + key[i]
+        i = (i + 1) % len(key)        
+    return "".join([chr(ord(secret_c) ^ ord(new_key_c)) for (secret_c,new_key_c) in zip(secret,new_key)])
+
+# read encrypted flag bytes
+flag_enc = open('level2.flag.txt.enc', 'rb').read()
+
+def level_2_pw_check():
+    user_pw = input("Please enter correct password for flag: ")
+    if( user_pw == chr(0x64) + chr(0x65) + chr(0x37) + chr(0x36) ):
+        print("Welcome back... your flag, user:")
+        decryption = str_xor(flag_enc.decode(), user_pw)
+        print(decryption)
+        return
+    print("That password is incorrect")
+
+4.Understand the password check
+The script compares user_pw to chr(0x64) + chr(0x65) + chr(0x37) + chr(0x36).
+Convert each hex to characters:
+0x64 → decimal 100 → 'd'
+0x65 → decimal 101 → 'e'
+0x37 → decimal 55 → '7'
+0x36 → decimal 54 → '6'
+So the password is:
+de76
+
+5. Run the script and enter the password
+python3 level2.py
+# When prompted:
+# Please enter correct password for flag: de76
+
+6. you will get the flag
