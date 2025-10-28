@@ -1,0 +1,36 @@
+Challenge :
+Crack the password expected by the provided Python checker to reveal the flag.
+
+1. Download the challenge files and open the Python script. For example:
+
+# assuming files are in current directory
+ls -l
+nano level1.py    # or: cat level1.py
+
+
+Inspect the script. Look for a variable or list that contains password candidates or a single hardcoded password.
+Typical patterns to look for:
+
+password = "...."
+
+pos_pw_list = [...]
+
+any hex/ASCII sequences that are converted into a short string
+
+Example — the key part of the script (excerpt):
+
+# pseudo-excerpt similar to what you'll see in the challenge
+# pos_pw_list or a direct assignment
+password = "545h"   # <-- example of a hardcoded password in the script
+# later: the script checks user input against this value and prints the flag
+
+
+Use the password you found and run the script:
+
+python3 level1.py
+# when prompted, paste/type the password you found
+
+
+The script will decrypt/print the flag if the password is correct. Example output:
+Correct! Here is your flag:
+picoCTF{***********}
