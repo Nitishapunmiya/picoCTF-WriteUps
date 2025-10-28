@@ -1,0 +1,30 @@
+Challenge Description :
+In this challenge, we were given a large zip file that contained multiple nested files and folders.
+Our task was to find the hidden flag somewhere inside the extracted contents.
+
+Steps to Solve :
+
+1.Copied the folder link provided in the challenge.
+
+2.Created a new directory to work in:
+mkdir big-zip
+cd big-zip
+
+3.Downloaded the zip file using wget:
+wget <folder_link>
+
+4.Unzipped the file using:
+unzip <file_name>.zip
+
+5.Changed directory into the extracted folder:
+cd <extracted_folder>
+
+6.Listed all files and folders using:
+ls
+
+7.Searched for the flag recursively using grep:
+grep -r pico 
+The command output displayed the file containing the flag.
+
+8.Finally got the Flag:
+picoCTF{your_flag_here}
